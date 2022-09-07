@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<food-delivery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:noNamespaceSchemaLocation="fooddelivery.xsd">
+    <address>
+        <city>Minsk</city>
+        <district>central</district>
+        <street>Lenina str.</street>
+        <house>5</house>
+    </address>
+    <director>
+        <name first="John" last="Wick"/>
+        <date-of-birth>1965-02-01</date-of-birth>
+        <id>123456</id>
+        <car>
+            <car-brand>Audi</car-brand>
+        </car>
+    </director>
+    <restaurant-list>
+        <restaurant>
+            <name>KFC</name>
+            <dish-list>
+                <dish>
+                    <name>Hot wings</name>
+                    <prepare-minutes>10</prepare-minutes>
+                    <spicy>true</spicy>
+                    <price>7.00</price>
+                    <ingredient-list>
+                        <ingredient>chicken wings</ingredient>
+                        <ingredient>salt</ingredient>
+                        <ingredient>oil</ingredient>
+                        <ingredient>chilli</ingredient>
+                    </ingredient-list>
+                </dish>
+                <dish>
+                    <name>Nuggets</name>
+                    <prepare-minutes>12</prepare-minutes>
+                    <spicy>false</spicy>
+                    <price>10.00</price>
+                    <ingredient-list>
+                        <ingredient>chicken meat</ingredient>
+                        <ingredient>salt</ingredient>
+                        <ingredient>oil</ingredient>
+                    </ingredient-list>
+                </dish>
+            </dish-list>
+        </restaurant>
+        <restaurant>
+            <name>Burger King</name>
+            <dish-list>
+                <dish>
+                    <name>Whopper</name>
+                    <prepare-minutes>6</prepare-minutes>
+                    <spicy>false</spicy>
+                    <price>6.00</price>
+                    <ingredient-list>
+                        <ingredient>bun</ingredient>
+                        <ingredient>beef</ingredient>
+                        <ingredient>cheese</ingredient>
+                        <ingredient>ketchup</ingredient>
+                    </ingredient-list>
+                </dish>
+                <dish>
+                    <name>Big king</name>
+                    <prepare-minutes>8</prepare-minutes>
+                    <spicy>false</spicy>
+                    <price>15.00</price>
+                    <ingredient-list>
+                        <ingredient>bun</ingredient>
+                        <ingredient>beef</ingredient>
+                        <ingredient>cheese</ingredient>
+                        <ingredient>ketchup</ingredient>
+                        <ingredient>salt</ingredient>
+                    </ingredient-list>
+                </dish>
+            </dish-list>
+        </restaurant>
+    </restaurant-list>
+    <order-list>
+        <order>
+            <restaurant xsi:nil="true"/>
+            <courier xsi:nil="true"/>
+            <client xsi:nil="true"/>
+            <payment xsi:nil="true"/>
+            <creation-time xsi:nil="true"/>
+            <dish-list xsi:nil="true"/>
+            <drink-list xsi:nil="true"/>
+            <delivery-distance xsi:nil="true"/>
+            <distance xsi:nil="true"/>
+        </order>
+    </order-list>
+    <courier-list>
+        <courier>
+            <name first="Vasiliy" last="Vasiliev"/>
+            <date-of-birth>1990-01-12</date-of-birth>
+            <id>28146</id>
+            <car>
+                <car-brand>WV</car-brand>
+            </car>
+            <courier-type>on_foot</courier-type>
+        </courier>
+        <courier>
+            <name first="Petr" last="Petrov"/>
+            <date-of-birth>1999-03-15</date-of-birth>
+            <id>123698</id>
+            <car>
+                <car-brand>Porsche</car-brand>
+            </car>
+            <courier-type>car</courier-type>
+        </courier>
+        <courier>
+            <name first="Ivan" last="Ivanov"/>
+            <date-of-birth>1998-03-03</date-of-birth>
+            <id>2896586</id>
+            <car>
+                <car-brand>Porsche</car-brand>
+            </car>
+            <courier-type>bicycle</courier-type>
+        </courier>
+    </courier-list>
+</food-delivery>

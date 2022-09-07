@@ -1,0 +1,121 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+    <xs:element name="food-delivery" type="food-deliveryType"/>
+    <xs:complexType name="addressType">
+        <xs:sequence>
+            <xs:element type="xs:string" name="city"/>
+            <xs:element type="xs:string" name="district"/>
+            <xs:element type="xs:string" name="street"/>
+            <xs:element type="xs:string" name="house"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="nameType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute type="xs:string" name="first"/>
+                <xs:attribute type="xs:string" name="last"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="carType">
+        <xs:sequence>
+            <xs:element name="car-brand" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="directorType">
+        <xs:sequence>
+            <xs:element type="nameType" name="name"/>
+            <xs:element type="xs:date" name="date-of-birth">
+            </xs:element>
+            <xs:element type="xs:string" name="id"/>
+            <xs:element type="carType" name="car"/>
+        </xs:sequence>
+    </xs:complexType>
+      <xs:complexType name="ingredient-listType">
+        <xs:sequence>
+            <xs:element type="xs:string" name="ingredient" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="dishType">
+        <xs:sequence>
+            <xs:element type="xs:string" name="name"/>
+            <xs:element type="xs:integer" name="prepare-minutes"/>
+            <xs:element type="xs:boolean" name="spicy"/>
+            <xs:element type="xs:decimal" name="price"/>
+            <xs:element type="ingredient-listType" name="ingredient-list"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="dish-listType">
+        <xs:sequence>
+            <xs:element type="dishType" name="dish" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="restaurantType">
+        <xs:sequence>
+            <xs:element name="name">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="KFC"/>
+                        <xs:enumeration value="Burger King"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element type="dish-listType" name="dish-list"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="restaurant-listType">
+        <xs:sequence>
+            <xs:element type="restaurantType" name="restaurant" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="clientType">
+        <xs:sequence>
+            <xs:element type="nameType" name="name"/>
+            <xs:element type="xs:dateTime" name="date-of-birth"/>
+            <xs:element type="xs:long" name="id"/>
+            <xs:element type="carType" name="car"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="orderType">
+        <xs:sequence>
+            <xs:element type="restaurantType" name="restaurant" nillable="true"/>
+            <xs:element type="courierType" name="courier" nillable="true"/>
+            <xs:element type="clientType" name="client" nillable="true"/>
+            <xs:element type="xs:string" name="payment" nillable="true"/>
+            <xs:element type="xs:dateTime" name="creation-time" nillable="true"/>
+            <xs:element type="dish-listType" name="dish-list" nillable="true"/>
+            <xs:element type="xs:string" name="drink-list" nillable="true"/>
+            <xs:element type="xs:nonNegativeInteger" name="delivery-distance" nillable="true"/>
+            <xs:element type="xs:nonNegativeInteger" name="distance" nillable="true"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="order-listType">
+        <xs:sequence>
+            <xs:element type="orderType" name="order"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="courierType">
+        <xs:sequence>
+            <xs:element type="nameType" name="name"/>
+            <xs:element type="xs:date" name="date-of-birth"/>
+            <xs:element type="xs:long" name="id"/>
+            <xs:element type="carType" name="car"/>
+            <xs:element type="xs:string" name="courier-type"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="courier-listType">
+        <xs:sequence>
+            <xs:element type="courierType" name="courier" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="food-deliveryType">
+        <xs:sequence>
+            <xs:element type="addressType" name="address"/>
+            <xs:element type="directorType" name="director"/>
+            <xs:element type="restaurant-listType" name="restaurant-list"/>
+            <xs:element type="order-listType" name="order-list"/>
+            <xs:element type="courier-listType" name="courier-list"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
