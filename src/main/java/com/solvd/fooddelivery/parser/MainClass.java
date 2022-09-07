@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 public class MainClass {
 
     private static final Logger LOGGER = LogManager.getLogger(MainClass.class);
-    private static final String FOOD_DELIVERY_XML_PATH = "src/fooddelivery.xml";
+    private static final String FOOD_DELIVERY_XML_PATH = "src/main/resources/fooddelivery.xml";
 
     public static void main(String[] args) {
         FoodDeliverySaxParser parser = new FoodDeliverySaxParser();
