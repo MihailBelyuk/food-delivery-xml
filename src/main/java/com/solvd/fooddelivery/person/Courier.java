@@ -1,9 +1,17 @@
 package com.solvd.fooddelivery.person;
 
+import com.solvd.fooddelivery.parser.LocalDateAdapter;
 import com.solvd.fooddelivery.vehicle.Car;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
+@XmlRootElement(name = "courier")
+@XmlType(propOrder = {"firstName", "lastName", "dateOfBirth", "deliveryType", "id", "car"})
 public class Courier {
 
     private Car car;
@@ -18,6 +26,7 @@ public class Courier {
         BICYCLE("bicycle"),
         ON_FOOT("on foot");
 
+
         private final String displayName;
 
         DeliveryType(String displayName) {
@@ -29,6 +38,7 @@ public class Courier {
         }
     }
 
+    @XmlElement
     public Car getCar() {
         return car;
     }
@@ -37,6 +47,7 @@ public class Courier {
         this.car = car;
     }
 
+    @XmlAttribute(name = "first")
     public String getFirstName() {
         return firstName;
     }
@@ -45,6 +56,7 @@ public class Courier {
         this.firstName = firstName;
     }
 
+    @XmlAttribute(name = "last")
     public String getLastName() {
         return lastName;
     }
@@ -53,6 +65,8 @@ public class Courier {
         this.lastName = lastName;
     }
 
+    @XmlElement(name = "date-of-birth")
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
@@ -61,6 +75,7 @@ public class Courier {
         this.dateOfBirth = dateOfBirth;
     }
 
+    @XmlElement
     public long getId() {
         return id;
     }
@@ -69,6 +84,7 @@ public class Courier {
         this.id = id;
     }
 
+    @XmlElement(name = "delivery-type")
     public DeliveryType getDeliveryType() {
         return deliveryType;
     }

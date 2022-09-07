@@ -1,5 +1,8 @@
 package com.solvd.fooddelivery.vehicle;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Car {
 
     private String brand;

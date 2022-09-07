@@ -10,7 +10,11 @@ public class MainClass {
     private static final String FOOD_DELIVERY_XML_PATH = "src/main/resources/fooddelivery.xml";
 
     public static void main(String[] args) {
-        FoodDeliverySaxParser parser = new FoodDeliverySaxParser();
+//        FoodDeliverySaxParser parser = new FoodDeliverySaxParser();
+//        Delivery delivery = parser.parse(FOOD_DELIVERY_XML_PATH);
+//        LOGGER.info(delivery);
+
+        FoodDeliveryJaxbParser parser = new FoodDeliveryJaxbParser();
         Delivery delivery = parser.parse(FOOD_DELIVERY_XML_PATH);
         LOGGER.info(delivery);
     }

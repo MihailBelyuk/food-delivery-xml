@@ -1,5 +1,6 @@
 package com.solvd.fooddelivery.restaurant;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 import java.util.List;
 
