@@ -1,20 +1,19 @@
 package com.solvd.fooddelivery.address;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "address")
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"city", "street", "houseNumber"})
 public class Address {
 
-
+    @XmlElement
     private String city;
-
+    @XmlElement
     private String street;
+    @XmlElement(name = "house")
+    private int houseNumber;
 
-    private String houseNumber;
-    @XmlElement(required = true)
     public String getCity() {
         return city;
     }
@@ -22,7 +21,7 @@ public class Address {
     public void setCity(String city) {
         this.city = city;
     }
-    @XmlElement(required = true)
+
     public String getStreet() {
         return street;
     }
@@ -30,12 +29,12 @@ public class Address {
     public void setStreet(String street) {
         this.street = street;
     }
-    @XmlElement(required = true, name = "house")
-    public String getHouseNumber() {
+
+    public int getHouseNumber() {
         return houseNumber;
     }
 
-    public void setHouseNumber(String houseNumber) {
+    public void setHouseNumber(int houseNumber) {
         this.houseNumber = houseNumber;
     }
 

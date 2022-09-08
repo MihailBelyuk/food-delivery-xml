@@ -1,12 +1,17 @@
 package com.solvd.fooddelivery.restaurant;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
-@XmlRootElement
+@XmlRootElement(name = "restaurant")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"name", "dishes"})
 public class Restaurant {
 
+    @XmlElement
     private String name;
+    @XmlElementWrapper(name = "dish-list")
+    @XmlElement(name = "dish")
     private List<Dish> dishes;
 
     public String getName() {

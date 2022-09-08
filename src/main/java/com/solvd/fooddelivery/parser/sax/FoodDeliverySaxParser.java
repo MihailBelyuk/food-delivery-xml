@@ -1,6 +1,7 @@
-package com.solvd.fooddelivery.parser;
+package com.solvd.fooddelivery.parser.sax;
 
 import com.solvd.fooddelivery.delivery.Delivery;
+import com.solvd.fooddelivery.parser.IParse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.xml.sax.SAXException;

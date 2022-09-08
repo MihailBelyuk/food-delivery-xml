@@ -1,4 +1,4 @@
-package com.solvd.fooddelivery.parser;
+package com.solvd.fooddelivery.parser.sax;
 
 import com.solvd.fooddelivery.address.Address;
 import com.solvd.fooddelivery.delivery.Delivery;
@@ -40,7 +40,9 @@ public class FoodDeliveryHandler extends DefaultHandler {
     private static final String PREPARE_MINUTES = "prepare-minutes";
     private static final String SPICY = "spicy";
     private static final String PRICE = "price";
-    private static final String COURIER_TYPE = "courier-type";
+    private static final String COURIER_TYPE = "delivery-type";
+    private static final String LAST_NAME_ATTR = "last-name";
+    private static final String FIRST_NAME_ATTR = "first-name";
 
     private Delivery delivery;
     private Director director;
@@ -77,7 +79,7 @@ public class FoodDeliveryHandler extends DefaultHandler {
     private boolean isDishList;
     private boolean isDish;
     private boolean isIngredient;
-    private boolean isCourierType;
+    private boolean isDeliveryType;
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
@@ -109,6 +111,8 @@ public class FoodDeliveryHandler extends DefaultHandler {
                 break;
             case COURIER:
                 courier = new Courier();
+                lastName = attributes.getValue(LAST_NAME_ATTR);
+                firstName = attributes.getValue(FIRST_NAME_ATTR);
                 isCourier = true;
                 break;
             case RESTAURANT:
@@ -126,12 +130,9 @@ public class FoodDeliveryHandler extends DefaultHandler {
                 break;
             case DIRECTOR:
                 director = new Director();
+                lastName = attributes.getValue(LAST_NAME_ATTR);
+                firstName = attributes.getValue(FIRST_NAME_ATTR);
                 isDirector = true;
-                break;
-            case NAME:
-                lastName = attributes.getValue("last");
-                firstName = attributes.getValue("first");
-                isName = true;
                 break;
             case CITY:
                 isCity = true;
@@ -154,6 +155,9 @@ public class FoodDeliveryHandler extends DefaultHandler {
             case PREPARE_MINUTES:
                 isPrepareMinutes = true;
                 break;
+            case NAME:
+                isName = true;
+                break;
             case SPICY:
                 isSpicy = true;
                 break;
@@ -161,7 +165,7 @@ public class FoodDeliveryHandler extends DefaultHandler {
                 isPrice = true;
                 break;
             case COURIER_TYPE:
-                isCourierType = true;
+                isDeliveryType = true;
                 break;
         }
     }
@@ -179,16 +183,13 @@ public class FoodDeliveryHandler extends DefaultHandler {
                 isStreet = false;
             }
             if (isHouse) {
-                address.setHouseNumber(string);
+                address.setHouseNumber(Integer.parseInt(string));
                 isHouse = false;
             }
         }
         if (isDirector) {
-            if (isName) {
-                director.setLastName(lastName);
-                director.setFirstName(firstName);
-                isName = false;
-            }
+            director.setLastName(lastName);
+            director.setFirstName(firstName);
             if (isDateOfBirth) {
                 director.setDateOfBirth(LocalDate.parse(string));
                 isDateOfBirth = false;
@@ -206,11 +207,8 @@ public class FoodDeliveryHandler extends DefaultHandler {
         }
         if (isCourierList) {
             if (isCourier) {
-                if (isName) {
-                    courier.setLastName(lastName);
-                    courier.setFirstName(firstName);
-                    isName = false;
-                }
+                courier.setLastName(lastName);
+                courier.setFirstName(firstName);
                 if (isDateOfBirth) {
                     courier.setDateOfBirth(LocalDate.parse(string));
                     isDateOfBirth = false;
@@ -226,9 +224,9 @@ public class FoodDeliveryHandler extends DefaultHandler {
                     }
                     courier.setCar(car);
                 }
-                if (isCourierType) {
+                if (isDeliveryType) {
                     courier.setDeliveryType(Courier.DeliveryType.valueOf(string.toUpperCase()));
-                    isCourierType = false;
+                    isDeliveryType = false;
                 }
             }
         }

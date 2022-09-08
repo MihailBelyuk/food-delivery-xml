@@ -5,22 +5,25 @@ import com.solvd.fooddelivery.person.Courier;
 import com.solvd.fooddelivery.person.Director;
 import com.solvd.fooddelivery.restaurant.Restaurant;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
 @XmlRootElement(name = "food-delivery")
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"address", "director", "restaurants", "couriers"})
 public class Delivery {
 
+    @XmlElement(name = "address")
     private Address address;
+    @XmlElement
     private Director director;
+    @XmlElementWrapper(name = "restaurant-list")
+    @XmlElement(name = "restaurant")
     private List<Restaurant> restaurants;
+    @XmlElementWrapper(name = "courier-list")
+    @XmlElement(name = "courier")
     private List<Courier> couriers;
 
-    @XmlElement(name = "address")
     public Address getAddress() {
         return address;
     }
@@ -29,7 +32,6 @@ public class Delivery {
         this.address = address;
     }
 
-    @XmlElement
     public Director getDirector() {
         return director;
     }
@@ -38,8 +40,6 @@ public class Delivery {
         this.director = director;
     }
 
-    @XmlElementWrapper(name = "restaurant-list")
-    @XmlElement(name = "restaurant")
     public List<Restaurant> getRestaurants() {
         return restaurants;
     }
@@ -48,8 +48,6 @@ public class Delivery {
         this.restaurants = restaurants;
     }
 
-    @XmlElementWrapper(name = "courier-list")
-    @XmlElement(name = "courier")
     public List<Courier> getCouriers() {
         return couriers;
     }

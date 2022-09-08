@@ -1,0 +1,125 @@
+{
+  "address": {
+    "city": "Minsk",
+    "street": "Lenina str.",
+    "houseNumber": 5
+  },
+  "director": {
+    "firstName": "John",
+    "lastName": "Wick",
+    "dateOfBirth": [
+      1965,
+      2,
+      1
+    ],
+    "car": {
+      "brand": "Audi"
+    },
+    "id": 123456
+  },
+  "restaurants": [
+    {
+      "name": "KFC",
+      "dishes": [
+        {
+          "name": "Hot wings",
+          "price": 7,
+          "ingredients": [
+            "salt",
+            "chicken wings",
+            "oil",
+            "chilli"
+          ],
+          "prepareTimeMinutes": 10,
+          "spicy": true
+        },
+        {
+          "name": "Nuggets",
+          "price": 10,
+          "ingredients": [
+            "chicken meat",
+            "oil",
+            "salt"
+          ],
+          "prepareTimeMinutes": 12,
+          "spicy": false
+        }
+      ]
+    },
+    {
+      "name": "Burger King",
+      "dishes": [
+        {
+          "name": "Whopper",
+          "price": 6,
+          "ingredients": [
+            "bun",
+            "beef",
+            "ketchup",
+            "salt",
+            "oil"
+          ],
+          "prepareTimeMinutes": 6,
+          "spicy": false
+        },
+        {
+          "name": "Big King",
+          "price": 15,
+          "ingredients": [
+            "salt",
+            "beef",
+            "bun",
+            "ketchup",
+            "cheese"
+          ],
+          "prepareTimeMinutes": 8,
+          "spicy": false
+        }
+      ]
+    }
+  ],
+  "couriers": [
+    {
+      "car": {
+        "brand": "VW"
+      },
+      "firstName": "Vasiliy",
+      "lastName": "Vasiliev",
+      "dateOfBirth": [
+        1990,
+        1,
+        12
+      ],
+      "deliveryType": "BICYCLE",
+      "id": 28146
+    },
+    {
+      "car": {
+        "brand": "Porsche"
+      },
+      "firstName": "Petr",
+      "lastName": "Petrov",
+      "dateOfBirth": [
+        1999,
+        3,
+        15
+      ],
+      "deliveryType": "CAR",
+      "id": 123698
+    },
+    {
+      "car": {
+        "brand": "Porsche"
+      },
+      "firstName": "Ivan",
+      "lastName": "Ivanov",
+      "dateOfBirth": [
+        1998,
+        3,
+        3
+      ],
+      "deliveryType": "ON_FOOT",
+      "id": 2896586
+    }
+  ]
+}

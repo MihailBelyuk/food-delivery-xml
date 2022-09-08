@@ -1,26 +1,29 @@
 package com.solvd.fooddelivery.person;
 
-import com.solvd.fooddelivery.parser.LocalDateAdapter;
+import com.solvd.fooddelivery.parser.jaxb.LocalDateAdapter;
 import com.solvd.fooddelivery.vehicle.Car;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
 @XmlRootElement(name = "director")
-@XmlType(propOrder = {"firstName", "lastName", "dateOfBirth", "car", "id"})
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"dateOfBirth", "car", "id"})
 public class Director {
 
+    @XmlAttribute(name = "first-name")
     private String firstName;
+    @XmlAttribute(name = "last-name")
     private String lastName;
+    @XmlElement(name = "date-of-birth")
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate dateOfBirth;
+    @XmlElement
     private Car car;
+    @XmlElement
     private long id;
 
-    @XmlElement
     public Car getCar() {
         return car;
     }
@@ -29,7 +32,6 @@ public class Director {
         this.car = car;
     }
 
-    @XmlAttribute(name = "first")
     public String getFirstName() {
         return firstName;
     }
@@ -38,7 +40,6 @@ public class Director {
         this.firstName = firstName;
     }
 
-    @XmlElement(name = "last")
     public String getLastName() {
         return lastName;
     }
@@ -47,8 +48,6 @@ public class Director {
         this.lastName = lastName;
     }
 
-    @XmlElement(name = "date-of-birth")
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
@@ -57,7 +56,6 @@ public class Director {
         this.dateOfBirth = dateOfBirth;
     }
 
-    @XmlElement
     public long getId() {
         return id;
     }

@@ -1,6 +1,7 @@
-package com.solvd.fooddelivery.parser;
+package com.solvd.fooddelivery.parser.jaxb;
 
 import com.solvd.fooddelivery.delivery.Delivery;
+import com.solvd.fooddelivery.parser.IParse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,7 +17,6 @@ public class FoodDeliveryJaxbParser implements IParse {
 
     @Override
     public Delivery parse(String filePath) {
-
         Delivery delivery = null;
         try {
             FileReader fileReader = new FileReader(filePath);
@@ -24,7 +24,7 @@ public class FoodDeliveryJaxbParser implements IParse {
             Unmarshaller unmarshaller = context.createUnmarshaller();
             delivery = (Delivery) unmarshaller.unmarshal(fileReader);
         } catch (JAXBException | IOException e) {
-            e.printStackTrace();
+            LOGGER.error("Failed to parse xml.");
         }
         return delivery;
     }
