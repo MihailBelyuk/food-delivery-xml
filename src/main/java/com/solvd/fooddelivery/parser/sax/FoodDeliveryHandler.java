@@ -1,4 +1,4 @@
-package com.solvd.fooddelivery.parser;
+package com.solvd.fooddelivery.parser.sax;
 
 import com.solvd.fooddelivery.address.Address;
 import com.solvd.fooddelivery.delivery.Delivery;
@@ -17,6 +17,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FoodDeliveryHandler extends DefaultHandler {
+
+    private static final String ADDRESS = "address";
+    private static final String FOOD_DELIVERY = "food-delivery";
+    private static final String COURIER_LIST = "courier-list";
+    private static final String CAR = "car";
+    private static final String RESTAURANT_LIST = "restaurant-list";
+    private static final String INGREDIENT = "ingredient";
+    private static final String INGREDIENT_LIST = "ingredient-list";
+    private static final String COURIER = "courier";
+    private static final String RESTAURANT = "restaurant";
+    private static final String DISH_LIST = "dish-list";
+    private static final String DISH = "dish";
+    private static final String DIRECTOR = "director";
+    private static final String NAME = "name";
+    private static final String CITY = "city";
+    private static final String STREET = "street";
+    private static final String HOUSE = "house";
+    private static final String DATE_OF_BIRTH = "date-of-birth";
+    private static final String ID = "id";
+    private static final String CAR_BRAND = "car-brand";
+    private static final String PREPARE_MINUTES = "prepare-minutes";
+    private static final String SPICY = "spicy";
+    private static final String PRICE = "price";
+    private static final String COURIER_TYPE = "delivery-type";
+    private static final String LAST_NAME_ATTR = "last-name";
+    private static final String FIRST_NAME_ATTR = "first-name";
+
     private Delivery delivery;
     private Director director;
     private Address address;
@@ -52,91 +79,93 @@ public class FoodDeliveryHandler extends DefaultHandler {
     private boolean isDishList;
     private boolean isDish;
     private boolean isIngredient;
-    private boolean isCourierType;
+    private boolean isDeliveryType;
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         switch (qName) {
-            case "food-delivery":
+            case FOOD_DELIVERY:
                 delivery = new Delivery();
                 break;
-            case "address":
+            case ADDRESS:
                 address = new Address();
                 isAddress = true;
                 break;
-            case "courier-list":
+            case COURIER_LIST:
                 couriers = new ArrayList<>();
                 isCourierList = true;
                 break;
-            case "car":
+            case CAR:
                 car = new Car();
                 isCar = true;
                 break;
-            case "restaurant-list":
+            case RESTAURANT_LIST:
                 restaurants = new ArrayList<>();
                 isRestaurants = true;
                 break;
-            case "ingredient":
+            case INGREDIENT:
                 isIngredient = true;
                 break;
-            case "ingredient-list":
+            case INGREDIENT_LIST:
                 ingredients = new ArrayList<>();
                 break;
-            case "courier":
+            case COURIER:
                 courier = new Courier();
+                lastName = attributes.getValue(LAST_NAME_ATTR);
+                firstName = attributes.getValue(FIRST_NAME_ATTR);
                 isCourier = true;
                 break;
-            case "restaurant":
+            case RESTAURANT:
                 restaurant = new Restaurant();
                 isRestaurant = true;
                 break;
-            case "dish-list":
+            case DISH_LIST:
                 dishes = new ArrayList<>();
                 isDishList = true;
                 isName = false;
                 break;
-            case "dish":
+            case DISH:
                 dish = new Dish();
                 isDish = true;
                 break;
-            case "director":
+            case DIRECTOR:
                 director = new Director();
+                lastName = attributes.getValue(LAST_NAME_ATTR);
+                firstName = attributes.getValue(FIRST_NAME_ATTR);
                 isDirector = true;
                 break;
-            case "name":
-                lastName = attributes.getValue("last");
-                firstName = attributes.getValue("first");
-                isName = true;
-                break;
-            case "city":
+            case CITY:
                 isCity = true;
                 break;
-            case "street":
+            case STREET:
                 isStreet = true;
                 break;
-            case "house":
+            case HOUSE:
                 isHouse = true;
                 break;
-            case "date-of-birth":
+            case DATE_OF_BIRTH:
                 isDateOfBirth = true;
                 break;
-            case "id":
+            case ID:
                 isId = true;
                 break;
-            case "car-brand":
+            case CAR_BRAND:
                 isCarBrand = true;
                 break;
-            case "prepare-minutes":
+            case PREPARE_MINUTES:
                 isPrepareMinutes = true;
                 break;
-            case "spicy":
+            case NAME:
+                isName = true;
+                break;
+            case SPICY:
                 isSpicy = true;
                 break;
-            case "price":
+            case PRICE:
                 isPrice = true;
                 break;
-            case "courier-type":
-                isCourierType = true;
+            case COURIER_TYPE:
+                isDeliveryType = true;
                 break;
         }
     }
@@ -154,16 +183,13 @@ public class FoodDeliveryHandler extends DefaultHandler {
                 isStreet = false;
             }
             if (isHouse) {
-                address.setHouseNumber(string);
+                address.setHouseNumber(Integer.parseInt(string));
                 isHouse = false;
             }
         }
         if (isDirector) {
-            if (isName) {
-                director.setLastName(lastName);
-                director.setFirstName(firstName);
-                isName = false;
-            }
+            director.setLastName(lastName);
+            director.setFirstName(firstName);
             if (isDateOfBirth) {
                 director.setDateOfBirth(LocalDate.parse(string));
                 isDateOfBirth = false;
@@ -181,11 +207,8 @@ public class FoodDeliveryHandler extends DefaultHandler {
         }
         if (isCourierList) {
             if (isCourier) {
-                if (isName) {
-                    courier.setLastName(lastName);
-                    courier.setFirstName(firstName);
-                    isName = false;
-                }
+                courier.setLastName(lastName);
+                courier.setFirstName(firstName);
                 if (isDateOfBirth) {
                     courier.setDateOfBirth(LocalDate.parse(string));
                     isDateOfBirth = false;
@@ -201,9 +224,9 @@ public class FoodDeliveryHandler extends DefaultHandler {
                     }
                     courier.setCar(car);
                 }
-                if (isCourierType) {
+                if (isDeliveryType) {
                     courier.setDeliveryType(Courier.DeliveryType.valueOf(string.toUpperCase()));
-                    isCourierType = false;
+                    isDeliveryType = false;
                 }
             }
         }
@@ -239,12 +262,12 @@ public class FoodDeliveryHandler extends DefaultHandler {
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        if ("address".equals(qName)) {
+        if (ADDRESS.equals(qName)) {
             delivery.setAddress(address);
             isAddress = false;
             address = null;
         }
-        if ("director".equals(qName)) {
+        if (DIRECTOR.equals(qName)) {
             director.setCar(car);
             delivery.setDirector(director);
             isDirector = false;
@@ -257,7 +280,7 @@ public class FoodDeliveryHandler extends DefaultHandler {
             firstName = null;
         }
         if (isCourierList && isCourier) {
-            if ("courier".equals(qName)) {
+            if (COURIER.equals(qName)) {
                 couriers.add(courier);
                 isCourier = false;
                 isCar = false;
@@ -267,39 +290,39 @@ public class FoodDeliveryHandler extends DefaultHandler {
                 courier = null;
             }
         }
-        if ("courier-list".equals(qName)) {
+        if (COURIER_LIST.equals(qName)) {
             delivery.setCouriers(couriers);
             isCourierList = false;
             couriers = null;
         }
-        if (isRestaurants && isRestaurant && "name".equals(qName)) {
+        if (isRestaurants && isRestaurant && NAME.equals(qName)) {
             restaurant.setName(name);
             restaurants.add(restaurant);
             isRestaurant = false;
             name = null;
         }
-        if ("restaurant-list".equals(qName)) {
+        if (RESTAURANT_LIST.equals(qName)) {
             delivery.setRestaurants(restaurants);
             isRestaurants = false;
             restaurants = null;
         }
-        if (isDish && "name".equals(qName)) {
+        if (isDish && NAME.equals(qName)) {
             dish.setName(name);
             dishes.add(dish);
             isDish = false;
             name = null;
         }
-        if ("dish-list".equals(qName)) {
+        if (DISH_LIST.equals(qName)) {
             restaurant.setDishes(dishes);
             isRestaurant = false;
             dishes = null;
             restaurant = null;
         }
-        if ("ingredient".equals(qName)) {
+        if (INGREDIENT.equals(qName)) {
             ingredients.add(ingredient);
             ingredient = null;
         }
-        if ("ingredient-list".equals(qName)) {
+        if (INGREDIENT_LIST.equals(qName)) {
             dish.setIngredients(ingredients);
             ingredients = null;
         }

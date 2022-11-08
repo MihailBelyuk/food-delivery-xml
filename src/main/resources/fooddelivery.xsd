@@ -1,22 +1,12 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-
     <xs:element name="food-delivery" type="food-deliveryType"/>
     <xs:complexType name="addressType">
         <xs:sequence>
             <xs:element type="xs:string" name="city"/>
-            <xs:element type="xs:string" name="district"/>
             <xs:element type="xs:string" name="street"/>
             <xs:element type="xs:string" name="house"/>
         </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="nameType">
-        <xs:simpleContent>
-            <xs:extension base="xs:string">
-                <xs:attribute type="xs:string" name="first"/>
-                <xs:attribute type="xs:string" name="last"/>
-            </xs:extension>
-        </xs:simpleContent>
     </xs:complexType>
     <xs:complexType name="carType">
         <xs:sequence>
@@ -25,14 +15,14 @@
     </xs:complexType>
     <xs:complexType name="directorType">
         <xs:sequence>
-            <xs:element type="nameType" name="name"/>
-            <xs:element type="xs:date" name="date-of-birth">
-            </xs:element>
+            <xs:element type="xs:date" name="date-of-birth"/>
             <xs:element type="xs:string" name="id"/>
             <xs:element type="carType" name="car"/>
         </xs:sequence>
+        <xs:attribute type="xs:string" name="first-name"/>
+        <xs:attribute type="xs:string" name="last-name"/>
     </xs:complexType>
-      <xs:complexType name="ingredient-listType">
+    <xs:complexType name="ingredient-listType">
         <xs:sequence>
             <xs:element type="xs:string" name="ingredient" maxOccurs="unbounded" minOccurs="0"/>
         </xs:sequence>
@@ -40,7 +30,7 @@
     <xs:complexType name="dishType">
         <xs:sequence>
             <xs:element type="xs:string" name="name"/>
-            <xs:element type="xs:integer" name="prepare-minutes"/>
+            <xs:element type="xs:nonNegativeInteger" name="prepare-minutes"/>
             <xs:element type="xs:boolean" name="spicy"/>
             <xs:element type="xs:decimal" name="price"/>
             <xs:element type="ingredient-listType" name="ingredient-list"/>
@@ -71,11 +61,12 @@
     </xs:complexType>
     <xs:complexType name="clientType">
         <xs:sequence>
-            <xs:element type="nameType" name="name"/>
             <xs:element type="xs:dateTime" name="date-of-birth"/>
             <xs:element type="xs:long" name="id"/>
             <xs:element type="carType" name="car"/>
         </xs:sequence>
+        <xs:attribute type="xs:string" name="first-name"/>
+        <xs:attribute type="xs:string" name="last-name"/>
     </xs:complexType>
     <xs:complexType name="orderType">
         <xs:sequence>
@@ -97,12 +88,13 @@
     </xs:complexType>
     <xs:complexType name="courierType">
         <xs:sequence>
-            <xs:element type="nameType" name="name"/>
             <xs:element type="xs:date" name="date-of-birth"/>
             <xs:element type="xs:long" name="id"/>
             <xs:element type="carType" name="car"/>
-            <xs:element type="xs:string" name="courier-type"/>
+            <xs:element type="xs:string" name="delivery-type"/>
         </xs:sequence>
+        <xs:attribute type="xs:string" name="first-name"/>
+        <xs:attribute type="xs:string" name="last-name"/>
     </xs:complexType>
     <xs:complexType name="courier-listType">
         <xs:sequence>

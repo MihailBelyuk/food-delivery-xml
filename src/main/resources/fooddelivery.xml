@@ -4,12 +4,10 @@
                xsi:noNamespaceSchemaLocation="fooddelivery.xsd">
     <address>
         <city>Minsk</city>
-        <district>central</district>
         <street>Lenina str.</street>
         <house>5</house>
     </address>
-    <director>
-        <name first="John" last="Wick"/>
+    <director first-name="John" last-name="Wick">
         <date-of-birth>1965-02-01</date-of-birth>
         <id>123456</id>
         <car>
@@ -90,32 +88,30 @@
         </order>
     </order-list>
     <courier-list>
-        <courier>
-            <name first="Vasiliy" last="Vasiliev"/>
+        <courier first-name="Vasiliy" last-name="Vasiliev">
             <date-of-birth>1990-01-12</date-of-birth>
             <id>28146</id>
             <car>
                 <car-brand>WV</car-brand>
             </car>
-            <courier-type>on_foot</courier-type>
+            <delivery-type>on_foot</delivery-type>
         </courier>
-        <courier>
-            <name first="Petr" last="Petrov"/>
+        <courier first-name="Petr" last-name="Petrov">
             <date-of-birth>1999-03-15</date-of-birth>
             <id>123698</id>
             <car>
                 <car-brand>Porsche</car-brand>
             </car>
-            <courier-type>car</courier-type>
+            <delivery-type>car</delivery-type>
         </courier>
-        <courier>
-            <name first="Ivan" last="Ivanov"/>
+        <courier first-name="Ivan" last-name="Ivanov">
+
             <date-of-birth>1998-03-03</date-of-birth>
             <id>2896586</id>
             <car>
                 <car-brand>Porsche</car-brand>
             </car>
-            <courier-type>bicycle</courier-type>
+            <delivery-type>bicycle</delivery-type>
         </courier>
     </courier-list>
 </food-delivery>

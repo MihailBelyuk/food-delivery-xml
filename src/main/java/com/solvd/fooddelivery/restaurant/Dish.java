@@ -1,14 +1,24 @@
 package com.solvd.fooddelivery.restaurant;
 
+import javax.xml.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.List;
 
+@XmlRootElement(name = "dish")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"name", "price", "ingredients", "prepareTimeMinutes", "spicy"})
 public class Dish {
 
+    @XmlElement
     private String name;
+    @XmlElement
     private BigDecimal price;
+    @XmlElementWrapper(name = "ingredient-list")
+    @XmlElement(name = "ingredient")
     private List<String> ingredients;
+    @XmlElement(name = "prepare-minutes")
     private int prepareTimeMinutes;
+    @XmlElement(name = "spicy")
     private boolean spicy;
 
     public int getPrepareTimeMinutes() {

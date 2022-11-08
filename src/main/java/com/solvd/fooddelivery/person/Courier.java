@@ -1,16 +1,31 @@
 package com.solvd.fooddelivery.person;
 
+import com.solvd.fooddelivery.parser.jaxb.DeliveryTypeAdapter;
+import com.solvd.fooddelivery.parser.jaxb.LocalDateAdapter;
 import com.solvd.fooddelivery.vehicle.Car;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
+@XmlRootElement(name = "courier")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"firstName", "lastName", "dateOfBirth", "deliveryType", "id", "car"})
 public class Courier {
 
+    @XmlElement
     private Car car;
+    @XmlAttribute(name = "first-name")
     private String firstName;
+    @XmlAttribute(name = "last-name")
     private String lastName;
+    @XmlElement(name = "date-of-birth")
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate dateOfBirth;
+    @XmlElement(name = "delivery-type")
+    @XmlJavaTypeAdapter(DeliveryTypeAdapter.class)
     private DeliveryType deliveryType;
+    @XmlElement
     private long id;
 
     public enum DeliveryType {

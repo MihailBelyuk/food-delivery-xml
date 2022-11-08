@@ -5,13 +5,23 @@ import com.solvd.fooddelivery.person.Courier;
 import com.solvd.fooddelivery.person.Director;
 import com.solvd.fooddelivery.restaurant.Restaurant;
 
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
+@XmlRootElement(name = "food-delivery")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"address", "director", "restaurants", "couriers"})
 public class Delivery {
 
+    @XmlElement(name = "address")
     private Address address;
+    @XmlElement
     private Director director;
+    @XmlElementWrapper(name = "restaurant-list")
+    @XmlElement(name = "restaurant")
     private List<Restaurant> restaurants;
+    @XmlElementWrapper(name = "courier-list")
+    @XmlElement(name = "courier")
     private List<Courier> couriers;
 
     public Address getAddress() {

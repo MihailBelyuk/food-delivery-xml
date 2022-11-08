@@ -1,15 +1,27 @@
 package com.solvd.fooddelivery.person;
 
+import com.solvd.fooddelivery.parser.jaxb.LocalDateAdapter;
 import com.solvd.fooddelivery.vehicle.Car;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
+@XmlRootElement(name = "director")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"dateOfBirth", "car", "id"})
 public class Director {
 
+    @XmlAttribute(name = "first-name")
     private String firstName;
+    @XmlAttribute(name = "last-name")
     private String lastName;
+    @XmlElement(name = "date-of-birth")
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate dateOfBirth;
+    @XmlElement
     private Car car;
+    @XmlElement
     private long id;
 
     public Car getCar() {
